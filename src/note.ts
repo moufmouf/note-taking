@@ -32,7 +32,7 @@ WA.onInit().then(() => {
         });
     } else {
         editSection.style.display = "none";
-        displayText.innerText = WA.state.noteText as string;
+        displayText.innerText = (WA.state.noteText ?? 'No messages left') as string;
     }
 
 }).catch(e => console.error(e));

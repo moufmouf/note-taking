@@ -40,7 +40,7 @@ WA.onInit().then(() => {
     });
 
     WA.room.onLeaveLayer("visibleNote").subscribe(() => {
-        console.log("Leaving visibleNote layer");
+        noteWebsite.close();
     });
 
 }).catch(e => console.error(e));
