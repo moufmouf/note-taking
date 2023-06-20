@@ -6,8 +6,12 @@ console.log('Script started successfully');
 
 const editSection = document.getElementById("editSection");
 const displayText = document.getElementById("displayText");
-const noteTextArea = document.getElementById("noteTextArea");
+const noteTextArea = document.getElementById("noteTextArea") as HTMLTextAreaElement;
 const saveButton = document.getElementById("saveButton");
+
+if (!editSection || !displayText || !noteTextArea || !saveButton) {
+    throw new Error("Missing element(s)");
+}
 
 // Waiting for the API to be ready
 WA.onInit().then(() => {
@@ -22,13 +26,13 @@ WA.onInit().then(() => {
 
     if (WA.player.tags.includes("admin")) {
         displayText.style.display = "none";
-        noteTextArea.value = WA.state.noteText ?? "";
-        saveButton.addEventListener("click", (event) => {
+        noteTextArea.value = (WA.state.noteText ?? "") as string;
+        saveButton.addEventListener("click", () => {
             WA.state.noteText = noteTextArea.value;
         });
     } else {
         editSection.style.display = "none";
-        displayText.innerText = WA.state.noteText;
+        displayText.innerText = WA.state.noteText as string;
     }
 
 }).catch(e => console.error(e));
